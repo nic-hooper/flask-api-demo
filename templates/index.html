@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Books</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1>Library</h1>
+    {% if books|length < 1 %}
+    <h4>There are no books to display</h4>
+    {% else %}
+    <table> 
+        <tr>    
+            <th>Title</th>
+            <th>Author</th>
+            <th>Genre</th>
+            <th>Rating</th>
+            <th>Notes</th>
+            <th>Added</th>
+        </tr>
+        {% for book in books %}
+        <tr>    
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.genre }}</td>
+            <td>{{ book.rating }}</td>
+            <td>{{ book.notes }}</td>
+            <td>{{ book.date_added.date() }}</td>
+            <td>
+                <a href="/delete/{{book.id}}">Delete</a>
+                <br>
+                <a href="/update/{{book.id}}">Update</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    
+    <h4>Add more books <a href="/add_book/">here</a></h4>
+</div>
+{% endblock %}
